@@ -1,0 +1,136 @@
+#include<iostream>
+using namespace std;
+
+struct TNode {
+    TNode *left;
+    int info;
+    TNode *right;
+};
+
+TNode *root = NULL, *t1, *t2, *newn;
+int n = 0;
+
+void getnode() {
+    newn = new TNode;
+    cout << "\nElement: ";
+    cin >> newn->info;
+    newn->left = NULL;
+    newn->right = NULL;
+}
+
+void BSTInsertion(TNode* t1) {
+    while (t1 != NULL) {
+        if (t1->info >= newn->info) {
+            t2 = t1;
+            t1 = t1->left;
+        } else if (t1->info < newn->info) {
+            t2 = t1;
+            t1 = t1->right;
+        }
+    }
+
+    if (t2->info >= newn->info) {
+        cout << "\nInserting " << newn->info << " as left child of " << t2->info << endl;
+        t2->left = newn;
+    } else {
+        cout << "\nInserting " << newn->info << " as right child of " << t2->info << endl;
+        t2->right = newn;
+    }
+
+    n++;
+}
+
+int BSTSearch(TNode* t1, int key) {
+    while (t1 != NULL) {
+        if (t1->info == key) {
+            cout << key << " found in the tree." << endl;
+            return 0;
+        } else if (t1->info > key) {
+            t1 = t1->left;
+        } else {
+            t1 = t1->right;
+        }
+    }
+
+    cout << key << " not found in the tree." << endl;
+    return 0;
+}
+
+void Inorder(TNode* t1) {
+    if (t1 == NULL) return;
+    Inorder(t1->left);
+    cout << t1->info << " ";
+    Inorder(t1->right);
+}
+
+void Preorder(TNode* t1) {
+    if (t1 == NULL) return;
+    cout << t1->info << " ";
+    Preorder(t1->left);
+    Preorder(t1->right);
+}
+
+void Postorder(TNode* t1) {
+    if (t1 == NULL) return;
+    Postorder(t1->left);
+    Postorder(t1->right);
+    cout << t1->info << " ";
+}
+
+int main() {
+    int ch1, key;
+    char ch2;
+
+    do {
+        cout << "\n1.Insert\n2.Traverse\n3.Search\n4.Exit\nEnter your Choice: ";
+        cin >> ch1;
+
+        switch (ch1) {
+            case 1:
+                getnode();
+                if (root == NULL) {
+                    cout << "\nInserting root\n";
+                    root = newn;
+                    n++;
+                } else {
+                    BSTInsertion(root);
+                }
+                break;
+
+            case 2:
+                if (root == NULL) {
+                    cout << "\nEmpty Tree";
+                } else {
+                    cout << "\nThe Inorder traversal is: \t";
+                    Inorder(root);
+                    cout << "\nThe Preorder traversal is: \t";
+                    Preorder(root);
+                    cout << "\nThe Postorder traversal is: \t";
+                    Postorder(root);
+                }
+                break;
+
+            case 3:
+                if (root == NULL) {
+                    cout << "\nEmpty Tree. Cannot perform search.";
+                } else {
+                    cout << "\nEnter the element to search: ";
+                    cin >> key;
+                    BSTSearch(root, key);
+                }
+                break;
+
+            case 4:
+                exit(-1);
+
+            default:
+                cout << "\nWrong Entry";
+        }
+
+        cout << "\nPress 'y' to continue: ";
+        cin >> ch2;
+    } while (ch2 == 'y');
+
+    return 0;
+}
+

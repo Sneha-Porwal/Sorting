@@ -1,0 +1,62 @@
+#include<iostream>
+using namespace std;
+void insertArray(int a[], int n)
+{
+for(int i=0;i<=n-1;i++) cin>>a[i];	
+}
+//*******************************
+void displayArray(int a[], int n)
+{
+for(int i=0;i<=n-1;i++) cout<<a[i]<<" ";	
+}
+//*********************************
+
+//******************************
+void merge(int a[],int L,int mid,int R)
+{
+	int n1=mid-L+1;
+	int n2=R-mid;
+	int left[n1+1];
+	int right[n2+1];
+	for(int i=0;i<=n1-1;i++)  left[i]=a[L+i];
+	left[n1]=100000;
+	for(int i=0;i<=n2-1;i++)  right[i]=a[mid+1+i];
+	right[n2]=100000;
+	int i=0,j=0,k;
+	for(int k=L;k<=R;k++)
+	{
+		if(left[i]<right[j])  a[k]=left[i++];
+		else if(left[i]>right[j]) a[k]=right[j++];
+		else
+		{
+			a[k++]=left[i++];
+			a[k++]=right[j++];
+		}
+	}
+	
+	
+}
+//*********************************
+void mergeSort(int a[],int L,int R)
+{
+	if(L<R)
+	{
+		int mid=(L+R)/2;
+	      mergeSort(a,L,mid);
+		mergeSort(a,mid+1,R);
+		merge(a,L,mid,R);
+	}
+}
+int main()
+{
+	int n; 
+	cout<<"Array size: "; cin>>n;
+	int a[n];
+	cout<<"\n Array Elements: \n";
+	insertArray(a,n);
+	cout<<"\nUnsorted: \n";
+	displayArray(a,n);
+	mergeSort(a,0,n-1);
+	cout<<"\nSorted: \n";
+	displayArray(a,n);
+}

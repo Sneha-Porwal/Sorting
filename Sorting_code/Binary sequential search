@@ -1,0 +1,61 @@
+
+#include <iostream>
+using namespace std;
+void insertArray(int a[],int n)
+{
+	cout<<"\n Enter 1st element:";
+	cin>>a[0];
+	for(int i=1;i<n;i++)
+	{
+		cout<<"\n enter the element of array:";
+		cin>>a[i];
+		if(a[i]<a[i-1])
+		{
+			
+			cout<<"\n not a sorted data.please enter data in sorted order";
+			i--;
+		}
+	}
+		
+}
+void displayArray(int a[],int n)
+{
+	for(int i=0;i<n;i++)
+	cout<<a[i]<<" ";
+}
+int Bsearch(int a[],int n,int key)
+{
+	int l=0,h=n,mid;
+	while(l<=h)
+	{
+		mid=(l+h)/2;
+		if(key==a[mid])
+		{
+		   cout<<"found at:"<<mid+1;
+		   return 0;
+	    }
+		else if(key<a[mid])
+		h=mid-1;
+		else
+		l=mid+1;
+	}
+	cout<<"not found";
+	return 0;
+}
+int main()
+{
+	int n;
+	cout<<"Enter array size:";
+    cin>>n;
+	int a[n];
+	cout<<"\n Enter the elements:";
+    insertArray(a,n);
+           cout<<"\n The array element:";
+	displayArray(a,n);
+	int key;
+	cout<<"\n Enter data to be searched:";
+	cin>>key;
+	int r=Bsearch(a, n,key);
+	return r;
+}
+

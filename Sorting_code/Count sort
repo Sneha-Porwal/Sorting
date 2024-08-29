@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+ void countingsort(int Array[], int n) {
+  int max = 0;
+  // find largest element in the Array
+  for (int i=0; i<n; i++) {  
+    if(max < Array[i]) {
+      max = Array[i];
+    } 
+  }
+  int freq[max+1];
+  for (int i=0; i<max+1; i++) {  
+    freq[i] = 0;
+  } 
+  for (int i=0; i<n; i++) {  
+    freq[Array[i]]++;
+  } 
+  for (int i=0, j=0; i<=max; i++) {  
+    while(freq[i]>0) {
+      Array[j] = i;
+      j++;
+      freq[i]--;
+    }
+  } 
+}
+void insert(int Array[], int n) { 
+  for (int i=0; i<n; i++) 
+    cin>>Array[i]; 
+ 
+} 
+void PrintArray(int Array[], int n) { 
+  for (int i=0; i<n; i++) 
+    cout<<Array[i]<<" "; 
+  cout<<"\n"; 
+} 
+int main (){
+  int n ;
+  cout<<"size:";
+  cin>>n;
+  int Array[n];
+  cout<<"Array:";
+  insert(Array,n);
+  cout<<"Original Array:\n";
+  PrintArray(Array, n);
+  countingsort(Array, n);
+  cout<<"\nSorted Array:\n";
+  PrintArray(Array, n);
+  return 0;
+}
+

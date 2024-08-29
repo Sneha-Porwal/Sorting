@@ -1,0 +1,95 @@
+
+
+#include<iostream>
+using namespace std;
+struct node
+{
+int info;
+ node *next;
+};
+node* front=NULL,*rear,*temp,*newn;
+int n=0;
+ void getnode()
+{
+    newn=new node;
+    if(newn==NULL)
+    cout<<"Overflow";
+    else{
+    cout<<"Enter data:";
+ 	cin>>newn->info;
+ 	newn->next=NULL;
+    }
+
+}
+void ins()
+{
+    getnode();
+if(front==NULL)
+{
+front=rear=newn;
+n++;
+}
+else
+{
+rear->next=newn;
+rear=newn;
+n++;
+}
+}
+ 
+void del()
+{
+    if(front==NULL)
+    cout<<"Queue is empty\n";
+else
+{
+    front=front->next;
+    n--;
+    
+}
+}
+ 
+void Traverse()
+{
+if(rear==NULL)
+
+cout<<"Queue is empty\n";
+else
+{
+    temp=front;
+    while(temp!=NULL)
+   {
+       cout<<temp->info<<"->";
+       temp=temp->next;
+    }
+}
+}
+ 
+int main()
+{
+int ch;
+char ch2;
+do
+{
+cout<<"\n\n*** Menu ***"<<"\n1.Insert\n2.Delete\n3.Display\n4.Exit";
+cout<<"\n\nEnter your choice(1-4):";
+cin>>ch;
+cout<<"\n";
+switch(ch)
+{
+case 1: ins();
+break;
+case 2: del();
+break;
+case 3: Traverse();
+break;
+case 4: exit(-1);
+break;
+default: cout<<"Wrong Choice!!!";
+}
+cout<<"\n Press Y/y to continue:";
+		cin>>ch2;
+	}while(ch2=='Y'|| ch2=='y');
+}
+
+
